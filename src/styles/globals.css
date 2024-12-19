@@ -1,0 +1,29 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #777;
+  padding: 0px;
+  font-family: "Roboto", sans-serif;
+  @apply overflow-x-hidden;
+}
+
+.text-gradient {
+  /* font-size: 14px; */
+  background: linear-gradient(
+    to right,
+    #04e95f,
+    #007bea
+  ); /* Definición estándar del gradiente */
+  -webkit-background-clip: text; /* Prefijo para WebKit (Chrome, Safari) */
+  background-clip: text; /* Definición estándar */
+  -webkit-text-fill-color: transparent; /* Prefijo para WebKit (Chrome, Safari) */
+  text-fill-color: transparent; /*Definición estándar, aunque no siempre soportada */
+}

@@ -1,0 +1,51 @@
+---
+import Layout from "@layouts/Layout.astro";
+import type { GetStaticPaths } from "astro";
+import Image from "astro/components/Image.astro";
+import { getCollection, render } from "astro:content";
+
+
+
+
+export const getStaticPaths = (async () => {
+  const casas = await getCollection("casas");
+  return casas.map((casa: any) => ({
+    params: {id:casa.slug},
+    props: {casa}
+  }))
+}) satisfies GetStaticPaths;
+
+const { casa } = Astro.props;
+const { data, slug } = casa;
+const {title, author, img, description} = data;
+const { Content } = await render(casa);
+
+export const prerender = true;
+---
+
+<Layout title={`${title}`} pageTitle={`${title}`} description={`${description}`}>
+    <article class="">
+      <div class="px-10 py-5">
+        <a href='/' class="hover:underline opacity-70">← Volver atrás</a>
+      </div>
+      <section class="px-10 py-5 flex flex-col md:flex-row md:justify-around">
+        <div class="flex rounded-lg border-2 border-[#000]/70 items-center justify-center p-2 mt-8">
+          <Image transition:name={`img-${slug}`} class="rounded w-72 h-auto md:w-[480px]" src={`/imgConvertidas/${img}`} alt={`${title}`} width={288} height={200}/>
+        </div>
+        <div class="prose mt-8 text-center">
+          <h1 class="text-blue-cumtual">{title}</h1>
+          <span class="block w-1/2 h-2 bg-green-cumtual mx-auto"></span>
+          <Content/>
+        </div>
+        <div class="flex justify-center items-center mt-8">
+          <a
+                type="button"
+                class="p-2 bg-green-cumtual rounded-lg text-[#FFF] font-semibold prose text-center"
+                href={'#'}
+              >
+                Contactános
+              </a>
+        </div>
+      </section>
+    </article>
+</Layout>

@@ -1,0 +1,371 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
+import IconoSeguridad from "@assets/img/lock.svg";
+import IconoPrecio from "@assets/img/payment.svg";
+import IconoTiempo from "@assets/img/time.svg";
+import IconoDormitorio from "@assets/img/icono_dormitorio.svg";
+import IconoEstacionamiento from "@assets/img/icono_estacionamiento.svg";
+import IconoBano from "@assets/img/icono_wc.svg";
+
+import { getCollection } from "astro:content";
+const casas = await getCollection("casas");
+export const prerender = true;
+---
+
+<Layout title="Home" description="Inicio de Bienes Raices" pageTitle="Home">
+  <article>
+    <section class="relative flex justify-center items-center">
+      <div class="relative w-full">
+        <Image
+          src={"/imgConvertidas/PrincipalHouse.webp"}
+          alt={"Image Cover"}
+          class="rounded-lg border-2 border-[#FFF]/50 w-full h-auto"
+          width={1080}
+          height={780}
+        />
+        <div class="absolute bottom-2 md:bottom-10 left-0 w-full px-6">
+          <h1
+            class="md:text-xl font-semibold text-[#000]/80 bg-[#FFF]/50 rounded-lg p-2 text-center md:w-[400px] w-[310px]"
+          >
+            Venta / Renta de Casas y Departamentos
+          </h1>
+          <p
+            class="text-[#FFF]/70 font-semibold py-2 bg-[#000]/30 p-2 rounded-md w-[120px] text-center"
+          >
+            Contáctanos
+          </p>
+        </div>
+      </div>
+    </section>
+  </article>
+  <h2 class="text-gradient text-xl text-center font-semibold mt-10">
+    Sobre Nosotros
+  </h2>
+  <article class="mt-10 flex md:flex-row flex-col px-10 justify-around gap-10">
+    <section
+      class="border-2 border-[#000]/50 rounded-lg flex flex-col items-center justify-center gap-4 p-8"
+      data-aos="flip-right"
+    >
+      <Image
+        src={IconoSeguridad}
+        width={80}
+        height={80}
+        alt={"Icono seguridad"}
+      />
+      <h3 class="text-gradient text-lg prose font-semibold">Seguridad</h3>
+      <p class="prose prose-invert text-center text-[#000]/70 font-medium">
+        Etiam condimentum dolor libero, eget pellentesque dui fringilla ac.
+        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+        cubilia curae; Integer feugiat pellentesque justo, in pellentesque ex
+        pellentesque eget.
+      </p>
+    </section>
+    <section
+      class="border-2 border-[#000]/50 rounded-lg flex flex-col items-center justify-center gap-4 p-8"
+      data-aos="flip-up"
+      data-aos-offset="200"
+    >
+      <Image src={IconoPrecio} width={80} height={80} alt={"Icono pago"} />
+      <h3 class="text-gradient text-lg prose font-semibold">Precio</h3>
+      <p class="prose prose-invert text-center text-[#000]/70 font-medium">
+        Etiam condimentum dolor libero, eget pellentesque dui fringilla ac.
+        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+        cubilia curae; Integer feugiat pellentesque justo, in pellentesque ex
+        pellentesque eget.
+      </p>
+    </section>
+    <section
+      class="border-2 border-[#000]/50 rounded-lg flex flex-col items-center justify-center gap-4 p-8"
+      data-aos="flip-down"
+      data-aos-offset="200"
+    >
+      <Image src={IconoTiempo} width={80} height={80} alt={"Icono tiempo"} />
+      <h3 class="text-gradient text-lg prose font-semibold">Tiempo</h3>
+      <p class="prose prose-invert text-center text-[#000]/70 font-medium">
+        Etiam condimentum dolor libero, eget pellentesque dui fringilla ac.
+        Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere
+        cubilia curae; Integer feugiat pellentesque justo, in pellentesque ex
+        pellentesque eget.
+      </p>
+    </section>
+  </article>
+  <h2 class="text-center font-bold text-xl p-8 text-gradient">
+    Casas y depas en venta
+  </h2>
+  <article class="px-10 flex flex-col gap-8 md:flex-row">
+    {
+      casas.map((casa: any) => {
+        const { slug, data } = casa;
+        const { title, description, img, author } = data;
+        return (
+          <section
+            class="p-4 border-2 border-[#000]/50 rounded-md flex flex-col gap-6"
+            data-aos="flip-up"
+          >
+            <Image
+              src={`/imgConvertidas/${img}`}
+              width={450}
+              height={450}
+              alt={title}
+              class="rounded-lg border-2 w-[540px]"
+              transition:name={`img-${slug}`}
+            />
+            <h3 class="font-semibold text-center prose text-xl text-[#1299dd]">
+              {title}
+            </h3>
+            <p class="prose text-center">{description}</p>
+            <p class="prose text-[#13cd54] font-bold text-center">$3,000,000</p>
+            <div class="flex justify-around">
+              <div class="flex items-center gap-2">
+                <Image
+                  src={IconoBano}
+                  width={30}
+                  height={30}
+                  alt={"icono bano"}
+                />
+                <p class="prose">3</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <Image
+                  src={IconoEstacionamiento}
+                  width={30}
+                  height={30}
+                  alt={"icono estacionamiento"}
+                />
+                <p class="prose">3</p>
+              </div>
+              <div class="flex items-center gap-2">
+                <Image
+                  src={IconoDormitorio}
+                  width={30}
+                  height={30}
+                  alt={"icono dormitorio"}
+                />
+                <p class="prose">3</p>
+              </div>
+            </div>
+            <a
+              type="button"
+              class="p-2 bg-green-cumtual rounded-lg text-[#FFF] font-semibold prose text-center"
+              href={`/casas/${slug}`}
+            >
+              Ver propiedad
+            </a>
+          </section>
+        );
+      })
+    }
+    <!-- <section
+      class="p-4 border-2 border-[#000]/50 rounded-md flex flex-col gap-6"
+    >
+      <Image
+        src={Casa2}
+        width={450}
+        height={450}
+        alt={"Casa terminados de lujo"}
+        class="rounded-lg border-2"
+      />
+      <h3 class="font-semibold text-center prose text-xl text-[#1299dd]">
+        Casa terminados de lujo
+      </h3>
+      <p class="prose text-center">
+        Casa con terminados de lujo en una zona con gran potencial de cremiento.
+      </p>
+      <p class="prose text-[#13cd54] font-bold text-center">$3,000,000</p>
+      <div class="flex justify-around">
+        <div class="flex items-center gap-2">
+          <Image src={IconoBano} width={30} height={30} alt={"icono bano"} />
+          <p class="prose">3</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <Image
+            src={IconoEstacionamiento}
+            width={30}
+            height={30}
+            alt={"icono estacionamiento"}
+          />
+          <p class="prose">3</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <Image
+            src={IconoDormitorio}
+            width={30}
+            height={30}
+            alt={"icono dormitorio"}
+          />
+          <p class="prose">3</p>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="p-2 bg-green-cumtual rounded-lg text-[#FFF] font-semibold prose"
+        >Ver propiedad</button
+      >
+    </section>
+    <section
+      class="p-4 border-2 border-[#000]/50 rounded-md flex flex-col gap-6"
+    >
+      <Image
+        src={Casa3}
+        width={450}
+        height={450}
+        alt={"Casa con alberca"}
+        class="rounded-lg border-2"
+      />
+      <h3 class="font-semibold text-center prose text-xl text-[#1299dd]">
+        Casa con alberca
+      </h3>
+      <p class="prose text-center">
+        Casa con alberca en zona muy exclusiva de la ciudad, a precio de remate.
+      </p>
+      <p class="prose text-[#13cd54] font-bold text-center">$3,000,000</p>
+      <div class="flex justify-around">
+        <div class="flex items-center gap-2">
+          <Image src={IconoBano} width={30} height={30} alt={"icono bano"} />
+          <p class="prose">3</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <Image
+            src={IconoEstacionamiento}
+            width={30}
+            height={30}
+            alt={"icono estacionamiento"}
+          />
+          <p class="prose">3</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <Image
+            src={IconoDormitorio}
+            width={30}
+            height={30}
+            alt={"icono dormitorio"}
+          />
+          <p class="prose">3</p>
+        </div>
+      </div>
+      <button
+        type="button"
+        class="p-2 bg-green-cumtual rounded-lg text-[#FFF] font-semibold prose"
+        >Ver propiedad</button
+      >
+    </section> -->
+  </article>
+  <div class="flex justify-end px-10">
+    <button
+      type="button"
+      class="bg-green-cumtual px-4 py-2 rounded-lg mt-8 prose text-[#FFF]"
+      >Ver todas las propiedades</button
+    >
+  </div>
+  <article class="mt-10">
+    <section>
+      <div class="relative w-full h-[500px]">
+        <Image
+          src={"/imgConvertidas/encuentralacasa.webp"}
+          width={1800}
+          height={750}
+          alt="Encuentra la casa de tus sueños"
+          class="object-cover object-center w-full h-full"
+        />
+        <div class="absolute inset-0 bg-[#000] bg-opacity-50"></div>
+        <div
+          class="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4"
+        >
+          <h2 class="text-3xl font-bold mb-4 prose text-[#FFF]">
+            Encuentra la casa de tus sueños
+          </h2>
+          <p class="text-lg mb-6 prose text-[#FFF]">
+            Llena el formulario de contacto y un asesor se pondrá en contacto
+            contigo a la brevedad
+          </p>
+          <button
+            type="button"
+            class="bg-green-cumtual hover:bg-green-600 px-4 py-2 rounded-lg mt-8 text-[#FFF]"
+            data-aos="zoom-in"
+          >
+            Contáctanos
+          </button>
+        </div>
+      </div>
+    </section>
+  </article>
+  <article class="flex mt-10 flex-col px-10 md:flex-row">
+    <section>
+      <h3 class="text-gradient text-xl prose font-bold text-center">
+        Nuestro Blog
+      </h3>
+      <div
+        class="flex flex-col md:flex-row md:w-3/4 items-center border-2 mt-4 p-4 gap-4 rounded-md"
+        data-aos="fade-right"
+      >
+        <Image
+          src={"/imgConvertidas/rooftop.webp"}
+          width={250}
+          height={250}
+          alt={"rooftop"}
+          class="rounded-lg"
+        />
+        <div class="w-full">
+          <h4 class="text-gradient font-bold prose text-center">
+            Terraza en el techo de tu casa
+          </h4>
+          <span class="block w-1/2 h-2 bg-green-cumtual mx-auto"></span>
+          <p class="prose mt-4 text-center">
+            Escrito el: <span class="text-green-cumtual font-semibold"
+              >12/12/2024</span
+            > por: <span class="text-blue-cumtual font-semibold">Luis</span>
+          </p>
+          <p class="prose text-[#000]/50 text-center">
+            Consejos para disfrutar de la mejor vista a tus alrededores de tu
+            departamento o desde lo más alto de tu propiedad.
+          </p>
+        </div>
+      </div>
+      <div
+        class="flex flex-col md:flex-row md:w-3/4 items-center border-2 mt-4 p-4 gap-4 rounded-md"
+        data-aos="fade-right"
+      >
+        <Image
+          src={"/imgConvertidas/interiores.webp"}
+          width={250}
+          height={250}
+          alt={"Interiores"}
+          class="rounded-lg"
+        />
+        <div>
+          <h4 class="text-gradient font-bold prose text-center">
+            La importancia de los interiores
+          </h4>
+          <span class="block w-1/2 h-2 bg-green-cumtual mx-auto"></span>
+          <p class="prose mt-4 text-center">
+            Escrito el: <span class="text-green-cumtual font-semibold"
+              >12/12/2024</span
+            > por: <span class="text-blue-cumtual font-semibold">Luis</span>
+          </p>
+          <p class="prose text-[#000]/50 text-center">
+            Consejos para un mejor espacio en tus interiores, destacando la
+            importancia de un diseño moderno.
+          </p>
+        </div>
+      </div>
+    </section>
+    <section class="mt-10 flex flex-col gap-4 md:w-1/3">
+      <h3 class="text-gradient text-xl prose font-bold text-center">
+        Testimonios
+      </h3>
+      <div class="bg-blue-cumtual p-4 rounded-md" data-aos="zoom-out-up">
+        <p class="prose text-2xl text-[#FFF] text-center">
+          <span class="text-4xl">"</span> El personal se comportó excelente, llevando
+          el <span class="font-semibold">proceso</span> de manera muy <span
+            class="font-semibold">atenta</span
+          > y <span class="font-semibold">respetable</span>, lo que me
+          ofrecieron cumplió totalmente mis espectativas.<span class="text-4xl"
+            >"</span
+          >
+        </p>
+        <p class="prose text-end font-semibold text-[#FFF]">- Fernando Arias</p>
+      </div>
+    </section>
+  </article>
+</Layout>
