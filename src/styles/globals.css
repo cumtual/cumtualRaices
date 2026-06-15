@@ -5,25 +5,53 @@
 }
 
 body {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
+  @apply font-sans bg-cumtual-light text-slate-800 antialiased overflow-x-hidden;
   font-size: 16px;
   line-height: 1.7;
-  color: #777;
-  padding: 0px;
-  font-family: "Roboto", sans-serif;
-  @apply overflow-x-hidden;
 }
 
+/* Custom glassmorphism styling */
+.glass {
+  @apply backdrop-blur-md bg-white/75 border border-white/20 shadow-sm;
+}
+
+/* Hover micro-animations */
+.hover-lift {
+  @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-200/50;
+}
+
+.hover-glow {
+  @apply transition-all duration-300 ease-out hover:shadow-md hover:shadow-green-cumtual/20;
+}
+
+/* Text Gradient for Cumtual branding */
 .text-gradient {
-  /* font-size: 14px; */
-  background: linear-gradient(
-    to right,
-    #04e95f,
-    #007bea
-  ); /* Definición estándar del gradiente */
-  -webkit-background-clip: text; /* Prefijo para WebKit (Chrome, Safari) */
-  background-clip: text; /* Definición estándar */
-  -webkit-text-fill-color: transparent; /* Prefijo para WebKit (Chrome, Safari) */
-  text-fill-color: transparent; /*Definición estándar, aunque no siempre soportada */
+  background: linear-gradient(to right, #04e95f, #007bea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-fill-color: transparent;
+}
+
+/* Subtle underline animation for links */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(to right, #04e95f, #007bea);
+  transform-origin: bottom right;
+  transition: transform 0.25s ease-out;
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }

@@ -2,8 +2,9 @@ import AOS from "aos";
 
 export function myAosInit() {
   AOS.init({
-    duration: 1000,
-    once: false,
-    mirror: true,
+    duration: 800,
+    easing: "ease-out-quad",
+    once: true,
+    offset: 50,
   });
 }

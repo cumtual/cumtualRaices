@@ -24,28 +24,81 @@ export const prerender = true;
 ---
 
 <Layout title={`${title}`} pageTitle={`${title}`} description={`${description}`}>
-    <article class="">
-      <div class="px-10 py-5">
-        <a href='/' class="hover:underline opacity-70">← Volver atrás</a>
+  <article class="max-w-6xl mx-auto px-6 md:px-12 mt-28 md:mt-32 pb-24">
+    <!-- Breadcrumb -->
+    <nav class="flex items-center gap-2 text-sm text-slate-500 mb-8">
+      <a href="/" class="hover:text-blue-cumtual transition-colors">Inicio</a>
+      <span class="text-slate-300">/</span>
+      <span class="text-slate-400">Propiedades</span>
+      <span class="text-slate-300">/</span>
+      <span class="text-slate-900 font-medium">{title}</span>
+    </nav>
+
+    <!-- Main Detail Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+      <!-- Left side: Image -->
+      <div class="lg:col-span-7 bg-white rounded-3xl border border-slate-100 shadow-xl overflow-hidden p-2">
+        <div class="rounded-2xl overflow-hidden aspect-video bg-slate-100">
+          <Image
+            transition:name={`img-${slug}`}
+            class="w-full h-full object-cover"
+            src={`/imgConvertidas/${img}`}
+            alt={`${title}`}
+            width={800}
+            height={450}
+          />
+        </div>
       </div>
-      <section class="px-10 py-5 flex flex-col md:flex-row md:justify-around">
-        <div class="flex rounded-lg border-2 border-[#000]/70 items-center justify-center p-2 mt-8">
-          <Image transition:name={`img-${slug}`} class="rounded w-72 h-auto md:w-[480px]" src={`/imgConvertidas/${img}`} alt={`${title}`} width={288} height={200}/>
+
+      <!-- Right side: Content & Action -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+        <div>
+          <span class="inline-flex items-center px-3 py-1 bg-green-50 rounded-full text-xs font-semibold text-green-700 mb-3">
+            En Venta
+          </span>
+          <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            {title}
+          </h1>
+          <p class="text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-cumtual to-blue-cumtual mt-4">
+            $3,000,000 MXN
+          </p>
         </div>
-        <div class="prose mt-8 text-center">
-          <h1 class="text-blue-cumtual">{title}</h1>
-          <span class="block w-1/2 h-2 bg-green-cumtual mx-auto"></span>
-          <Content/>
+
+        <hr class="border-slate-100" />
+
+        <!-- Amenities -->
+        <div class="grid grid-cols-3 gap-4 py-2 text-center text-slate-500 text-sm">
+          <div class="bg-slate-50 p-3.5 rounded-2xl flex flex-col items-center gap-1 border border-slate-100">
+            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Baños</span>
+            <span class="font-extrabold text-slate-800 text-lg">3</span>
+          </div>
+          <div class="bg-slate-50 p-3.5 rounded-2xl flex flex-col items-center gap-1 border border-slate-100">
+            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Cajones</span>
+            <span class="font-extrabold text-slate-800 text-lg">3</span>
+          </div>
+          <div class="bg-slate-50 p-3.5 rounded-2xl flex flex-col items-center gap-1 border border-slate-100">
+            <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Habitaciones</span>
+            <span class="font-extrabold text-slate-800 text-lg">3</span>
+          </div>
         </div>
-        <div class="flex justify-center items-center mt-8">
+
+        <!-- Property Description text (Rendered markdown content) -->
+        <div class="prose prose-slate prose-headings:font-bold prose-p:font-light prose-p:leading-relaxed text-slate-600 mt-2">
+          <Content />
+        </div>
+
+        <div class="flex flex-col gap-3 mt-4">
           <a
-                type="button"
-                class="p-2 bg-green-cumtual rounded-lg text-[#FFF] font-semibold prose text-center"
-                href={'#'}
-              >
-                Contactános
-              </a>
+            href="#"
+            class="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-green-cumtual to-blue-cumtual text-white font-semibold rounded-full hover-lift hover-glow transition-all duration-300 shadow-md text-center"
+          >
+            Contactar Asesor
+          </a>
+          <p class="text-center text-xs text-slate-400 font-light">
+            Publicado por: <strong class="font-medium text-slate-600">{author}</strong>
+          </p>
         </div>
-      </section>
-    </article>
+      </div>
+    </div>
+  </article>
 </Layout>
